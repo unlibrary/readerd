@@ -1,7 +1,7 @@
 defmodule UnLibD.State do
   @moduledoc false
 
-  defstruct interval: :timer.minutes(2), enabled?: false
+  defstruct [:interval, :enabled?]
 
   @type t() :: %__MODULE__{
           interval: integer(),
@@ -9,6 +9,9 @@ defmodule UnLibD.State do
         }
 
   def new do
-    %__MODULE__{}
+    %__MODULE__{
+      interval: Application.fetch_env!(:unlibd, :interval),
+      enabled?: Application.fetch_env!(:unlibd, :autopull)
+    }
   end
 end

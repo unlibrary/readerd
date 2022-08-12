@@ -30,8 +30,7 @@ defmodule UnLibD.Server do
 
   @impl true
   def handle_info(:pull, %State{} = state) do
-    # UnLib.Feeds.pull_all()
-    IO.inspect("hahah")
+    UnLib.Feeds.pull_all()
 
     {:noreply, state}
   end

@@ -3,8 +3,8 @@ defmodule UnLibD do
   Public API for `UnLibD.Server`.
 
   GenServer that pulls new entries every X minutes.
-  This feature is optional and has to be explicitly enabled after
-  the Genserver has been started using `UnLibD.enable/0`.
+  This feature is optional and can be disabled in the application
+  config located in `config/runtime.exs`.
   """
   alias UnLibD.Server
 
