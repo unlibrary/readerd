@@ -15,6 +15,7 @@ defmodule UnLibD.MixProject do
 
   def application do
     [
+      mod: {UnLibD.Application, []},
       extra_applications: [:logger]
     ]
   end
