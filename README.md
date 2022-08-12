@@ -18,4 +18,7 @@ Start the deamon using:
 
 ```shell
 $ readerd
+readerd@delta
 ```
+
+The deamon will print its node name which you can use to connect to it.
