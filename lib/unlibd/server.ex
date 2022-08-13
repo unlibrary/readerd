@@ -15,6 +15,8 @@ defmodule UnLibD.Server do
     state = State.new()
     schedule_next(state.interval)
 
+    IO.puts("Running on #{node()}")
+
     {:ok, state}
   end
 

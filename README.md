@@ -1,6 +1,6 @@
-# Unlibrary deamon
+# Unlibrary daemon
 
-aka `readerd`
+aka `readerd` or `unlibd`
 
 This project acts as a layer between [Unlibrary reader](https://github.com/unlibrary/reader) and clients such as [Unlibrary CLI](https://github.com/unlibrary/cli) (and in the future maybe even a local web client).
 
@@ -14,11 +14,18 @@ Coming soon. I will probably also create a horrible but functional PKGBUILD for 
 
 ## Usage
 
-Start the deamon using:
+If running in dev mode (aka git cloning the source code):
 
 ```shell
-$ readerd
+$ ./dev.sh
 readerd@delta
 ```
 
-The deamon will print its node name which you can use to connect to it.
+If installed via the future PKGBUILD:
+
+```shell
+$ readerd
+unlibd@delta.localdomain
+```
+
+The daemon will print its node name which you can use to connect to it.

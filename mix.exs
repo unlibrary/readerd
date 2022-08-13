@@ -3,7 +3,7 @@ defmodule UnLibD.MixProject do
 
   def project do
     [
-      name: "Unlibrary deamon",
+      name: "Unlibrary daemon",
       source_url: "https://github.com/unlibrary/readerd",
       app: :unlibd,
       version: "0.1.0",
