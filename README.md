@@ -18,14 +18,14 @@ If running in dev mode (aka git cloning the source code):
 
 ```shell
 $ ./dev.sh
-readerd@delta
+Running on readerd@delta.localdomain
 ```
 
 If installed via the future PKGBUILD:
 
 ```shell
 $ readerd
-unlibd@delta.localdomain
+Running on readerd@delta.localdomain
 ```
 
 The daemon will print its node name which you can use to connect to it.
