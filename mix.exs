@@ -16,6 +16,7 @@ defmodule UnLibD.MixProject do
   def application do
     [
       mod: {UnLibD.Application, []},
+      env: [interval: :timer.minutes(2), autopull: true],
       extra_applications: [:logger]
     ]
   end

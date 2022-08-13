@@ -20,7 +20,3 @@ config :unlib, UnLib.Repo,
   username: "postgres",
   password: "postgres",
   log: false
-
-if Mix.env() == :runtime do
-  import_config "runtime.exs"
-end
