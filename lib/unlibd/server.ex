@@ -7,7 +7,8 @@ defmodule UnLibD.Server do
   @me __MODULE__
 
   def start_link(_opts) do
-    GenServer.start_link(__MODULE__, nil, name: @me)
+    empty_state = nil
+    GenServer.start_link(__MODULE__, empty_state, name: @me)
   end
 
   @impl true
@@ -32,9 +33,26 @@ defmodule UnLibD.Server do
 
   @impl true
   def handle_info(:pull, %State{} = state) do
-    UnLib.Feeds.pull_all()
+    response = UnLib.Feeds.pull_all()
+    print_errors(response)
 
     {:noreply, state}
+  end
+
+  defp print_errors(response) do
+    for data <- response do
+      if data.error do
+        IO.puts(
+          IO.ANSI.red() <>
+            IO.ANSI.bright() <>
+            "Error: " <>
+            IO.ANSI.reset() <>
+            IO.ANSI.red() <>
+            data.error <>
+            IO.ANSI.reset()
+        )
+      end
+    end
   end
 
   @impl true
