@@ -24,7 +24,7 @@ defmodule UnLibD.Server do
   @impl true
   def handle_info(:update, %State{} = state) do
     if state.enabled? do
-      GenServer.call(__MODULE__, :pull)
+      pull()
     end
 
     schedule_next(state.interval)
@@ -33,9 +33,7 @@ defmodule UnLibD.Server do
 
   @impl true
   def handle_call(:pull, _from, %State{} = state) do
-    response = UnLib.Feeds.pull_all()
-    print_errors(response)
-
+    response = pull()
     {:reply, response, state}
   end
 
@@ -47,6 +45,12 @@ defmodule UnLibD.Server do
   @impl true
   def handle_cast(:enable, %State{} = state) do
     {:noreply, %State{state | enabled?: not state.enabled?}}
+  end
+
+  defp pull do
+    response = UnLib.Feeds.pull_all()
+    print_errors(response)
+    response
   end
 
   defp print_errors(response) do
