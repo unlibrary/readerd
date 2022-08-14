@@ -8,16 +8,19 @@ defmodule UnLibD do
   """
   alias UnLibD.Server
 
+  @spec enable :: :ok
   def enable do
     GenServer.cast(Server, :enable)
   end
 
+  @spec enabled? :: boolean()
   def enabled? do
     GenServer.call(Server, :enabled?)
   end
 
+  @spec pull_now :: [UnLib.Feeds.Data.t()]
   def pull_now do
-    send(Server, :pull)
+    GenServer.call(Server, :pull)
   end
 
   # Child spec

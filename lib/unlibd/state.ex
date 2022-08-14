@@ -8,6 +8,7 @@ defmodule UnLibD.State do
           enabled?: boolean()
         }
 
+  @spec new :: t()
   def new do
     %__MODULE__{
       interval: Application.fetch_env!(:unlibd, :interval),
