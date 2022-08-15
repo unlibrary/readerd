@@ -23,9 +23,8 @@ defmodule UnLibD.Server do
 
   @impl true
   def handle_info(:update, %State{} = state) do
-    if state.enabled? do
-      pull()
-    end
+    clean_read_lists()
+    if state.enabled?, do: pull()
 
     schedule_next(state.interval)
     {:noreply, state}
@@ -51,6 +50,11 @@ defmodule UnLibD.Server do
     response = UnLib.Feeds.pull_all()
     print_errors(response)
     response
+  end
+
+  defp clean_read_lists do
+    UnLib.Sources.list()
+    |> Enum.map(&Task.async(fn -> UnLib.Sources.clean_read_list(&1) end))
   end
 
   defp print_errors(response) do
