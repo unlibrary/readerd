@@ -55,7 +55,7 @@ defmodule UnLibD.Server do
   defp clean_read_lists do
     UnLib.Sources.list()
     |> Enum.map(&Task.async(fn -> UnLib.Sources.clean_read_list(&1) end))
-    |> Task.await_many()
+    |> Task.await_many(:infinity)
   end
 
   defp print_errors(response) do
