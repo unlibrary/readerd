@@ -20,11 +20,12 @@ defmodule UnLibD.Auth do
 
   @spec current_user :: UnLib.Account.t()
   def current_user do
-    {:ok, account} =
-      Agent.get(:user)
-      |> UnLib.Accounts.get()
-
-    account
+    if id = Agent.get(:user) do
+      {:ok, account} =UnLib.Accounts.get(id)
+      account
+    else
+      nil
+    end
   end
 
   @spec logged_in? :: boolean()
