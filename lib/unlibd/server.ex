@@ -3,6 +3,7 @@ defmodule UnLibD.Server do
 
   use GenServer
   alias UnLibD.State
+  alias UnLibD.Auth
 
   @me __MODULE__
 
@@ -47,7 +48,10 @@ defmodule UnLibD.Server do
   end
 
   defp pull do
-    response = UnLib.Feeds.pull_all()
+    response =
+      Auth.current_user()
+      |> UnLib.Feeds.pull()
+
     print_errors(response)
     response
   end
