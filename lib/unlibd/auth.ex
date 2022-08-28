@@ -22,7 +22,7 @@ defmodule UnLibD.Auth do
   def current_user do
     {:ok, account} =
       Agent.get(:user)
-      |> UnLib.Accounts.get(id)
+      |> UnLib.Accounts.get()
 
     account
   end
