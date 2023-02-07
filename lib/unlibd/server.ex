@@ -24,7 +24,6 @@ defmodule UnLibD.Server do
 
   @impl true
   def handle_info(:update, %State{} = state) do
-    clean_read_lists()
     if state.enabled?, do: pull()
 
     schedule_next(state.interval)
@@ -54,12 +53,6 @@ defmodule UnLibD.Server do
 
     print_errors(response)
     response
-  end
-
-  defp clean_read_lists do
-    UnLib.Sources.list()
-    |> Enum.map(&Task.async(fn -> UnLib.Sources.clean_read_list(&1) end))
-    |> Task.await_many(:infinity)
   end
 
   defp print_errors(response) do
