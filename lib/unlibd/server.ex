@@ -5,11 +5,8 @@ defmodule UnLibD.Server do
   alias UnLibD.State
   alias UnLibD.Auth
 
-  @me __MODULE__
-
-  def start_link(_opts) do
-    empty_state = nil
-    GenServer.start_link(__MODULE__, empty_state, name: @me)
+  def start_link(opts) do
+    GenServer.start_link(__MODULE__, opts, name: __MODULE__)
   end
 
   @impl true
@@ -46,10 +43,13 @@ defmodule UnLibD.Server do
     {:noreply, %State{state | enabled?: not state.enabled?}}
   end
 
+  @spec pull() :: [UnLib.Feeds.Data.t()]
   defp pull do
     response =
-      Auth.current_user()
-      |> UnLib.Feeds.pull()
+      case Auth.current_user() do
+        %UnLib.Account{} = account -> UnLib.Feeds.pull(account)
+        _ -> []
+      end
 
     print_errors(response)
     response

@@ -8,17 +8,17 @@ defmodule UnLibD do
   """
   alias UnLibD.Server
 
-  @spec enable :: :ok
+  @spec enable() :: :ok
   def enable do
     GenServer.cast(Server, :enable)
   end
 
-  @spec enabled? :: boolean()
+  @spec enabled?() :: boolean()
   def enabled? do
     GenServer.call(Server, :enabled?)
   end
 
-  @spec pull_now :: [UnLib.Feeds.Data.t()]
+  @spec pull_now() :: [UnLib.Feeds.Data.t()]
   def pull_now do
     GenServer.call(Server, :pull)
   end
@@ -26,9 +26,6 @@ defmodule UnLibD do
   # Child spec
 
   def child_spec(opts) do
-    %{
-      id: Keyword.get(opts, :id, __MODULE__),
-      start: {Server, :start_link, [opts]}
-    }
+    Server.child_spec(opts)
   end
 end

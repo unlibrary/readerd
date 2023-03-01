@@ -1,3 +1,3 @@
 #!/bin/bash
 
-MIX_ENV=prod iex --name readerd -S mix
+MIX_ENV=prod iex --sname readerd -S mix

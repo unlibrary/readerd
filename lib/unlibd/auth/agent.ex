@@ -12,12 +12,12 @@ defmodule UnLibD.Agent do
 
   @spec get(:logged_in) :: boolean()
   def get(:logged_in) do
-    Agent.get(@me, fn {logged_in, _} -> logged_in end)
+    Agent.get(@me, fn {logged_in?, _account} -> logged_in? end)
   end
 
-  @spec get(:user) :: UnLib.Account.t()
+  @spec get(:user) :: UnLib.Account.t() | nil
   def get(:user) do
-    Agent.get(@me, fn {_, user} -> user end)
+    Agent.get(@me, fn {_logged_in?, user} -> user end)
   end
 
   @spec put(:logout) :: :ok

@@ -23,7 +23,12 @@ defmodule UnLibD.MixProject do
 
   defp deps do
     [
-      {:unlib, path: "../reader"}
+      {:unlib, path: "../reader"},
+
+      # CI/CD
+      {:ex_check, "~> 0.14.0", only: [:dev], runtime: false},
+      {:credo, ">= 0.0.0", only: [:dev], runtime: false},
+      {:dialyxir, ">= 0.0.0", only: [:dev], runtime: false}
     ]
   end
 end
