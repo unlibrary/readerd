@@ -20,7 +20,7 @@ defmodule UnLibD do
 
   @spec pull_now() :: [UnLib.Feeds.Data.t()]
   def pull_now do
-    GenServer.call(Server, :pull)
+    GenServer.call(Server, :pull, :infinity)
   end
 
   # Child spec
