@@ -12,12 +12,12 @@ defmodule UnLibD.Agent do
 
   @spec get(:logged_in) :: boolean()
   def get(:logged_in) do
-    Agent.get(@me, fn {logged_in?, _account} -> logged_in? end)
+    Agent.get(@me, fn {logged_in?, _user_id} -> logged_in? end)
   end
 
-  @spec get(:user) :: UnLib.Account.t() | nil
-  def get(:user) do
-    Agent.get(@me, fn {_logged_in?, user} -> user end)
+  @spec get(:user_id) :: Ecto.UUID.t() | nil
+  def get(:user_id) do
+    Agent.get(@me, fn {_logged_in?, user_id} -> user_id end)
   end
 
   @spec put(:logout) :: :ok
@@ -25,12 +25,12 @@ defmodule UnLibD.Agent do
     Agent.update(@me, fn _state -> init_state() end)
   end
 
-  @spec put(UnLib.Account.t()) :: :ok
-  def put(account) do
-    Agent.update(@me, fn _state -> set_state(account) end)
+  @spec put(Ecto.UUID.t()) :: :ok
+  def put(user_id) do
+    Agent.update(@me, fn _state -> set_state(user_id) end)
   end
 
-  defp set_state(account), do: {true, account}
+  defp set_state(user_id), do: {true, user_id}
 
   # Child spec
 
