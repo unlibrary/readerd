@@ -4,6 +4,7 @@ defmodule UnLibD.Server do
   use GenServer
   alias UnLibD.State
   alias UnLibD.Auth
+  alias UnLibD.Logger
 
   def start_link(opts) do
     GenServer.start_link(__MODULE__, opts, name: __MODULE__)
@@ -45,6 +46,8 @@ defmodule UnLibD.Server do
 
   @spec pull() :: [UnLib.Feeds.Data.t()]
   defp pull do
+    Logger.info("Info: Pulling feeds")
+
     response =
       case Auth.current_user() do
         %UnLib.Account{} = account -> UnLib.Feeds.pull(account)
@@ -58,15 +61,7 @@ defmodule UnLibD.Server do
   defp print_errors(response) do
     for data <- response do
       if data.error do
-        IO.puts(
-          IO.ANSI.red() <>
-            IO.ANSI.bright() <>
-            "Error: " <>
-            IO.ANSI.reset() <>
-            IO.ANSI.red() <>
-            data.error <>
-            IO.ANSI.reset()
-        )
+        Logger.error(data.error)
       end
     end
   end
