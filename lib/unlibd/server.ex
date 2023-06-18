@@ -54,7 +54,10 @@ defmodule UnLibD.Server do
         _ -> []
       end
 
+    Logger.success("[DONE] Finished pulling feeds")
+    Logger.info("Printing errors below:")
     print_errors(response)
+
     response
   end
 

@@ -24,4 +24,16 @@ defmodule UnLibD.Logger do
         IO.ANSI.reset()
     )
   end
+
+  def success(message) do
+    IO.puts(
+        IO.ANSI.blue() <>
+        IO.ANSI.green() <>
+        "[V] " <>
+        IO.ANSI.reset() <>
+        IO.ANSI.green() <>
+        message <>
+        IO.ANSI.reset()
+    )
+  end
 end

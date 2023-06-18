@@ -13,4 +13,4 @@ config :unlibd,
 config :unlib,
   pull_in_async: true,
   pre_pull_hook: &(UnLibD.Logger.info("Pulling #{&1.name} (#{&1.url})")),
-  post_pull_hook: &(UnLibD.Logger.info("Finished #{&1.name} (#{&1.url})"))
+  post_pull_hook: &(UnLibD.Logger.success("Finished #{&1.name} (#{&1.url})"))
