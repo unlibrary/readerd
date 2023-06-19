@@ -3,7 +3,7 @@ defmodule UnLibD.Logger do
 
   def error(message) do
     IO.puts(
-        IO.ANSI.red() <>
+      IO.ANSI.red() <>
         IO.ANSI.bright() <>
         "Error: " <>
         IO.ANSI.reset() <>
@@ -15,7 +15,7 @@ defmodule UnLibD.Logger do
 
   def info(message) do
     IO.puts(
-        IO.ANSI.blue() <>
+      IO.ANSI.blue() <>
         IO.ANSI.bright() <>
         "Info: " <>
         IO.ANSI.reset() <>
@@ -27,7 +27,7 @@ defmodule UnLibD.Logger do
 
   def success(message) do
     IO.puts(
-        IO.ANSI.blue() <>
+      IO.ANSI.blue() <>
         IO.ANSI.green() <>
         "[V] " <>
         IO.ANSI.reset() <>
